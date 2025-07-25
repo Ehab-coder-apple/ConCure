@@ -1,0 +1,13 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    Header always set Content-Security-Policy: upgrade-insecure-requests
+
+    # Redirect everything to public directory
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ /public/$1 [L]
+    
+    # Redirect root to public
+    RewriteRule ^$ public/ [L]
+</IfModule>
